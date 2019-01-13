@@ -1,8 +1,11 @@
 # custom-test
 
 Nástroj pro vytváření si vlastních testových otázek. 
+
 Autor: Filip Skalický
+
 Email: xskali@fit.vutbr.cz
+
 Licence: MIT
 
 Plugins:
