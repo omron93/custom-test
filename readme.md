@@ -1,5 +1,15 @@
 # custom-test
 
+Nástroj pro vytváření si vlastních testových otázek. 
+Autor: Filip Skalický
+Email: xskali@fit.vutbr.cz
+Licence: MIT
+
+Plugins:
+- Owl carousel
+- object-fit-images
+
+
 ## tlačítka
 
 #### předchozí
@@ -37,7 +47,7 @@
 
 ### jednotlivé otázky
 
-- otázka se skládá z libovolného obsahu (obrázek, text, video, ... )
+- otázka se skládá z libovolného obsahu (obrázek, text, video, ... ). Např.
 ```html
 <img class="contain" src="//satyr.io/650x65:44/3" alt="">
 ```
@@ -74,3 +84,18 @@
 
 - buď do "style/own.css"
 - nebo se vytvořit vlastní soubor a nalinkovat ho v "head" v index.php
+
+
+## mapování kláves
+
+- vše je v js/script-own.js
+```js
+$('html').bind('keydown', function(e) {
+    
+};
+```
+
+## odpovědi z DB
+- v "odpovědi.php"
+- připojí se do DB, vypíše tabulku
+- je možné upravit aby to vypisovalo co je potřeba
