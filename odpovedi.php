@@ -21,34 +21,35 @@ ini_set("default_charset", "UTF-8");
 
     <link rel="stylesheet" href="style/own.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Test - odpovedi</title>
+    <title>Answers</title>
 </head>
 <body style="overflow: auto!important;">
     <div class="row">
 
     </div>
-                <h1>Předchozí odpovědi</h1>
+    <div class=''>
+                <h1>Answers</h1>
                 <table class="table">
                     <tr>
-                        <td>id_sesion</td>
-                        <td>začátek plnění</td>
-                        <td>konec plnění</td>
+                        <td>start</td>
+                        <td>end</td>
+                        <td>custom_input</td>
                     </tr>
                     <?php
-                    include "./connect.php";/* připojení k databázi */
-                    $dotaz = mysql_query("select * from Kata_test_sesion");
+                    include "./connect.php";
+                    $res = $mysqli->query("SELECT * FROM `response_sessions`");
 
-                    while ($row = mysql_fetch_array($dotaz)) {
-                        $dotaz2 = mysql_query("SELECT * FROM  `Kata_test_odpoved` WHERE  `id_sesion` = $row[0]");
-                        $rowspan = mysql_num_rows($dotaz2) + 1;
-                        printf("<tr><td rowspan=$rowspan>%s</td><td>%s</td><td>%s s</td><td>%s</td></tr>", $row[0], $row[1],$row[2]);
-                        while ($row2 = mysql_fetch_array($dotaz2)) {
-                            printf("<tr><td>%s</td><td>odpoved = %s</td><td>otazka = %s</td></tr>", $row2[2], $row2[3], $row2[4]);
+                    while ($row = $res->fetch_assoc()) {
+                        $res2 = $mysqli->query("SELECT * FROM  `response_answers` WHERE  `id_session` = ".$row['id_session']);
+                        $rowspan = $res2->num_rows + 1;
+                        printf("<tr><td rowspan=$rowspan>%s</td><td>%s</td><td>%s</td></tr>", $row['start'], $row['end'],$row['custom_data']);
+                        while ($row2 = $res2->fetch_array()) {
+                            printf("<tr><td>Question No %s</td><td>Time = %s</td><td>Key = %s</td></tr>", $row2['question_id'], $row2['time'], $row2['answer']);
                         }
                     }
                     ?>
                 </table>
-            </div>
+    </div>
 
 <script src="js/script-own.js"></script>
 </body>

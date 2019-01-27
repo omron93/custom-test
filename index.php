@@ -26,7 +26,7 @@ include "php/parsedown/Parsedown.php"
     <title>Test</title>
 </head>
 <body>
-<form id="test" action="send.php" method="post">
+<form id="custom_input" action="send.php" method="post">
     <div class="owl-carousel owl-theme">
         <?php
         $Parsedown = new Parsedown();
@@ -34,31 +34,24 @@ include "php/parsedown/Parsedown.php"
         if ($handle) {
             echo "<div class=''>";
             while (($line = fgets($handle)) !== false) {
-                if (substr( $line, 0, 4 ) === "++++"){
-                    echo "</div>";
-                    if (($line = fgets($handle)) !== false){
-                        if (substr( $line, 0, 15 ) === "<!-- uvodni -->"){
-                            echo "<div class='time_start'>";
-                        }
-                        else if (substr( $line, 0, 23 ) === "<!-- uvodni konecny -->"){
-                            echo "<div class='time_stop'>";
-                        }
-                        else if (substr( $line, 0, 16 ) === "<!-- konecny -->"){
-                            echo "<div class='konecny'>";
-                        }
-                        else{
-                            echo "<div class=''>";
-                        }
-                    }
-                    else{
-                        echo "<div class=''>";
-                    }
+                if (substr( $line, 0, 4 ) === "++++") {
+                    echo "</div><div class=''>";
                 }
-                else{
+                else {
                     echo $line;
                 }
+
             }
-            echo "</div>";
+            echo '
+</div>
+<input id="submit" class="time_stop" style="width:300px;" type="button" name="submit" value="Save results" />
+<div class="database_success">
+    <h4>Responses saved!</h4>
+    You can now close the web page. Thank you.
+</div>
+<div class="database_fail">
+    <h4>Error occured. Can\'t store responses into database!</h4>
+</div>';
 
             fclose($handle);
         } else {

@@ -4,13 +4,15 @@ ini_set("default_charset", "UTF-8");
 
 <?php
 include "./connect.php";/* připojení k databázi */
-$odpovedi = $_POST["odpovedi"];
-$zacatek = $_POST["start"];
-$konec = $_POST["konec"];
-$sql= mysql_query("INSERT INTO `Kata_test_sesion`(`zacatek`,`konec`) VALUES ('$zacatek', '$konec')") or die(mysql_error());
-$id = mysql_insert_id();
-foreach ($odpovedi as $item){
-    $sql= mysql_query("INSERT INTO `Kata_test_odpoved`(`id_sesion`,`cas`,`odpoved`, `otazka`) VALUES ('$id', '$item[1]', '$item[0]', '$item[2]')") or die(mysql_error());
+$data = $_POST["custom_data"];
+$start = $_POST["start"];
+$end = $_POST["end"];
+$times = $_POST["times"];
+$keys = $_POST["keys"];
+$mysqli->query("INSERT INTO `response_sessions`(`start`,`end`, `custom_data`) VALUES ('$start', '$end', '$data')") or die($mysqli->error);
+$id = $mysqli->insert_id;
+for ($i = 0; $i < count($times); $i++) {
+    $mysqli->query("INSERT INTO `response_answers`(`id_session`,`question_id`, `time`, `answer`) VALUES ('$id', '$i', '$times[$i]', '$keys[$i]')") or die($mysqli->error);
 }
 
 ?>

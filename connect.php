@@ -2,12 +2,11 @@
 ini_set("default_charset", "UTF-8");
 ?>
 
-<?
-$db_server    = 'localhost:/var/run/mysql/mysql.sock'; /* Název serveru, ke kterému se budeme připojovat */
-$db_login     = ''; /* Jméno uživatele do DB */
-$db_password  = ''; /* Heslo uživatele do DB */
-$db_name      = ''; /* Název databáze, ve které jsme si vytvořili tabulku "uzivatele" */
-$spojeni      = @MySQL_Connect($db_server ,$db_login, $db_password);
-@MySQL_Select_DB($db_name)or die('<p style="color: red">Nastala chyba v pripojeni k databazi');
-mysql_query("set names utf8");
+<?php
+$db_server    = 'localhost:/var/run/mysql/mysql.sock'; /* DB location */
+$db_login     = ''; /* DB user */
+$db_password  = ''; /* DB password */
+$db_name      = ''; /* DB name */
+$mysqli       = new mysqli($db_server ,$db_login, $db_password, $db_name);
+$mysqli->query("set names utf8");
 ?>
