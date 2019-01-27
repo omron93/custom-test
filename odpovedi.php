@@ -32,7 +32,6 @@ ini_set("default_charset", "UTF-8");
                     <tr>
                         <td>id_sesion</td>
                         <td>začátek plnění</td>
-                        <td>doba plnění</td>
                         <td>konec plnění</td>
                     </tr>
                     <?php
@@ -42,7 +41,7 @@ ini_set("default_charset", "UTF-8");
                     while ($row = mysql_fetch_array($dotaz)) {
                         $dotaz2 = mysql_query("SELECT * FROM  `Kata_test_odpoved` WHERE  `id_sesion` = $row[0]");
                         $rowspan = mysql_num_rows($dotaz2) + 1;
-                        printf("<tr><td rowspan=$rowspan>%s</td><td>%s</td><td>%s s</td><td>%s</td></tr>", $row[0], $row[1],$row[2], $row[3]);
+                        printf("<tr><td rowspan=$rowspan>%s</td><td>%s</td><td>%s s</td><td>%s</td></tr>", $row[0], $row[1],$row[2]);
                         while ($row2 = mysql_fetch_array($dotaz2)) {
                             printf("<tr><td>%s</td><td>odpoved = %s</td><td>otazka = %s</td></tr>", $row2[2], $row2[3], $row2[4]);
                         }

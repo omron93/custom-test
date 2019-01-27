@@ -26,10 +26,6 @@ include "php/parsedown/Parsedown.php"
     <title>Test</title>
 </head>
 <body>
-<div class="cas-plneni">
-    Čas plnění: <span class="minuty">00</span>m:<span class="sekundy">00</span>s
-</div>
-
 <form id="test" action="send.php" method="post">
     <div class="owl-carousel owl-theme">
         <?php
@@ -42,10 +38,10 @@ include "php/parsedown/Parsedown.php"
                     echo "</div>";
                     if (($line = fgets($handle)) !== false){
                         if (substr( $line, 0, 15 ) === "<!-- uvodni -->"){
-                            echo "<div class='uvodni'>";
+                            echo "<div class='time_start'>";
                         }
                         else if (substr( $line, 0, 23 ) === "<!-- uvodni konecny -->"){
-                            echo "<div class='uvodni konecny'>";
+                            echo "<div class='time_stop'>";
                         }
                         else if (substr( $line, 0, 16 ) === "<!-- konecny -->"){
                             echo "<div class='konecny'>";
