@@ -15,6 +15,7 @@ include "php/parsedown/Parsedown.php"
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <link rel="stylesheet" href="js/OwlCarousel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="js/OwlCarousel/dist/assets/owl.theme.default.min.css">
     <script src="js/OwlCarousel/dist/owl.carousel.min.js"></script>
@@ -23,28 +24,35 @@ include "php/parsedown/Parsedown.php"
 
     <link rel="stylesheet" href="style/own.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Test</title>
+    <title>Response tester</title>
 </head>
 <body>
 <form id="custom_input" action="send.php" method="post">
-    <div class="owl-carousel owl-theme">
-        <?php
-        $Parsedown = new Parsedown();
-        $handle = fopen("custom/content.htm", "r");
-        if ($handle) {
-            echo "<div class=''>";
-            while (($line = fgets($handle)) !== false) {
-                if (substr( $line, 0, 4 ) === "++++") {
-                    echo "</div><div class=''>";
-                }
-                else {
-                    echo $line;
-                }
+    <div name="owl-slides" class="owl-carousel owl-theme">
 
+<?php
+$handle = fopen("custom/content.htm", "r");
+if ($handle) {
+    $stage = 0;
+    while (($line = fgets($handle)) !== false) {
+        if (substr( $line, 0, 8 ) == "<!--++++" && substr( $line, -4, -1 ) == "-->") {
+            $keys = substr($line, 8, -4);
+            if ($stage != 0) { echo "</div>"; }
+            if (empty($keys)) {
+                echo "<div class=''>";
+            } else {
+                echo "<div class='time_start $keys'>";
             }
-            echo '
-</div>
-<input id="submit" class="time_stop" style="width:300px;" type="button" name="submit" value="Save results" />
+            $stage = 1;
+        } else {
+            if ($stage == 0) { echo "<div class=''>"; $stage = 1; }
+                echo $line;
+            }
+        }
+        if ($stage > 0) { echo '</div>'; }
+
+        echo '
+<div><input id="submit" class="time_stop" style="width:300px;" type="button" name="submit" value="Save results" /></div>
 <div class="database_success">
     <h4>Responses saved!</h4>
     You can now close the web page. Thank you.
@@ -54,10 +62,9 @@ include "php/parsedown/Parsedown.php"
 </div>';
 
             fclose($handle);
-        } else {
-            // error opening the file.
         }
-        ?>
+?>
+
 
     </div>
 

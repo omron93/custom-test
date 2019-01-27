@@ -12,23 +12,22 @@ $(document).ready(function(){
     $(function () { objectFitImages() });
 });
 
-// Block keyboard input for some time after new page appear
-$(".owl-carousel").on("change.owl.carousel", function (e) {
-    console.log("Lock");
-    $(".owl-carousel").addClass("lock");
+// Get time of page enter and unblock keyboard input for some time
+$(".owl-carousel").on("refreshed.owl.carousel", newPage);
+$(".owl-carousel").on("translated.owl.carousel", newPage);
+
+function newPage(e) {
+    if ($(".owl-carousel .owl-item.active .time_start").length > 0) {
+        console.log("TIME STARTED");
+        time_recording = 1;
+    }
+
+    page_enter = new Date();
     setTimeout(function () {
         $(".owl-carousel").removeClass("lock");
         console.log("Unlock");
-    }, 10);
-});
-
-$('.buttonNext').click(function() {
-    $(".owl-carousel").trigger('next.owl.carousel');
-});
- 
-$('.buttonPrev').click(function() {
-    $(".owl-carousel").trigger('prev.owl.carousel');
-});
+    }, 100);
+};
 
 
 var session_start = new Date();
@@ -39,12 +38,6 @@ var page_enter = new Date();
 var time_recording = 0;
 var recorded_keys = [];
 var recorded_times = [];
-
-$('.time_start').click(function() {
-    console.log("Time recording started")
-    time_recording = 1;
-    nextPage();
-});
 
 $('#submit').click(function() {
     nextPage();
@@ -82,17 +75,13 @@ $('html').bind('keydown', function(e) {
     // Pages before time recording starts - next page on Enter
     if (time_recording == 0 && !$(".owl-carousel").hasClass("lock")) {
         if (code == 13) {
-            if ($(".owl-carousel .owl-item.active .time_start").length > 0) {
-                time_recording = 1;
-            }
             nextPage();
         }
-    }
+    } else if (time_recording == 1 && !$(".owl-carousel").hasClass("lock")) {
     // Pages during time recording - specified keys
-    if (time_recording == 1 && !$(".owl-carousel").hasClass("lock")) {
-        console.log("Time recording keydown")
+        console.log("Time recording keydown");
         if (code == 70 || code == 102 || code == 74 || code == 106) { // f j
-            console.log(e.key);logAnswer(e.key);
+            logAnswer(e.key);
             nextPage();
         } else {
             console.log(code);
@@ -101,8 +90,9 @@ $('html').bind('keydown', function(e) {
 });
 
 function nextPage(){
-    page_enter = new Date();
-    $(".owl-carousel").trigger('next.owl.carousel');
+    $(".owl-carousel").addClass("lock");
+    console.log("Lock!");
+    $(".owl-carousel").trigger("next.owl.carousel");
     if ($(".owl-carousel .owl-item.active .time_stop").length > 0 ){
         if (result_stored == false){
             result_stored = true;
@@ -114,8 +104,14 @@ function nextPage(){
 function logAnswer(code){
     var now = new Date();
 
-    recorded_times.push(page_enter.getMilliseconds() - now.getMilliseconds());
+    recorded_times.push(now.getTime() - page_enter.getTime());
     recorded_keys.push(code);
-    console.log(now.getMilliseconds() - page_enter.getMilliseconds());
+    console.log(now.getTime() - page_enter.getTime());
 }
+
+
+// Custom JS
+$('.buttonNext').click(function() {
+    nextPage();
+});
 
