@@ -22,16 +22,13 @@ ini_set("default_charset", "UTF-8");
     <title>Answers</title>
 </head>
 <body style="overflow: auto!important;">
-    <div class="row">
-
-    </div>
     <div class=''>
                 <h1>Answers</h1>
                 <table class="table">
                     <tr>
                         <td>start</td>
                         <td>end</td>
-                        <td>custom_input</td>
+                        <td>user_input</td>
                     </tr>
                     <?php
                     include "./connect.php";

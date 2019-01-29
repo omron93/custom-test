@@ -43,17 +43,20 @@ $('#submit').click(function() {
     nextPage();
     var session_end = new Date();
     var serial =  $("#custom_input").serializeArray();
+    var custom_vars = "";
     var custom_data = "";
     var i = 0;
     for (; i < serial.length-1; i += 1){
-        custom_data += serial[i].name + ": " + serial[i].value + "; ";
+        custom_vars += serial[i].name + ";";
+        custom_data += serial[i].value + ";";
     }
-    custom_data += serial[i].name + ": " + serial[i].value;
+    custom_vars += serial[i].name
+    custom_data += serial[i].value;
     console.log("custom_data -", custom_data);
     $.ajax({
         url: 'send.php',
         type: 'POST',
-        data: {"start": session_start.toUTCString(), "end": session_end.toUTCString(), "custom_data": custom_data, "times": recorded_times, "keys": recorded_keys},
+        data: {"start": session_start.toUTCString(), "end": session_end.toUTCString(), "custom_vars": custom_vars, "custom_data": custom_data, "times": recorded_times, "keys": recorded_keys},
         success: function (msg) {
             $("#submit").slideUp();
             $(".database_success").slideDown();
@@ -62,6 +65,7 @@ $('#submit').click(function() {
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
+            $("#submit").slideUp();
             $(".database_fail").slideDown();
             $(".database_success").slideUp();
         }

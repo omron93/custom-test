@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `response_sessions` (
   `id_session` int(10) NOT NULL AUTO_INCREMENT,
   `start` varchar(40) NOT NULL,
   `end` varchar(40) NOT NULL,
+  `custom_vars` LONGTEXT,
   `custom_data` LONGTEXT,
   PRIMARY KEY (`id_session`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
