@@ -17,8 +17,6 @@ ini_set("default_charset", "UTF-8");
     <link rel="stylesheet" href="js/OwlCarousel/dist/assets/owl.theme.default.min.css">
     <script src="js/OwlCarousel/dist/owl.carousel.min.js"></script>
 
-    <script src="js/object-fit-images/dist/ofi.min.js"></script>
-
     <link rel="stylesheet" href="style/own.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Answers</title>
@@ -50,8 +48,6 @@ ini_set("default_charset", "UTF-8");
                     ?>
                 </table>
     </div>
-
-<script src="js/script-own.js"></script>
 </body>
 
 </html>

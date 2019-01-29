@@ -68,10 +68,11 @@ $('#submit').click(function() {
     });
 });
 
+var keysUp = next_keys.toUpperCase().split(',');
+var keysLo = next_keys.toLowerCase().split(',');
 
 $('html').bind('keydown', function(e) {
     var code = e.charCode || e.keyCode;
-
     // Pages before time recording starts - next page on Enter
     if (time_recording == 0 && !$(".owl-carousel").hasClass("lock")) {
         if (code == 13) {
@@ -79,8 +80,9 @@ $('html').bind('keydown', function(e) {
         }
     } else if (time_recording == 1 && !$(".owl-carousel").hasClass("lock")) {
     // Pages during time recording - specified keys
+        console.log(e.key);
         console.log("Time recording keydown");
-        if (code == 70 || code == 102 || code == 74 || code == 106) { // f j
+        if (keysUp.includes(e.key) || keysLo.includes(e.key)) {
             logAnswer(e.key);
             nextPage();
         } else {

@@ -1,7 +1,5 @@
 <?php
 ini_set("default_charset", "UTF-8");
-
-include "php/parsedown/Parsedown.php"
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -32,6 +30,7 @@ include "php/parsedown/Parsedown.php"
 
 <?php
 $handle = fopen("custom/content.htm", "r");
+$next_keys = "";
 if ($handle) {
     $stage = 0;
     while (($line = fgets($handle)) !== false) {
@@ -41,6 +40,7 @@ if ($handle) {
             if (empty($keys)) {
                 echo "<div class=''>";
             } else {
+                $next_keys = $keys;
                 echo "<div class='time_start $keys'>";
             }
             $stage = 1;
@@ -69,7 +69,8 @@ if ($handle) {
     </div>
 
 </form>
-<script src="js/script-own.js"></script>
+<script type="text/javascript">var next_keys = "<?= $next_keys ?>";</script>
+<script type="text/javascript" src="js/script-own.js"></script>
 </body>
 
 </html>
