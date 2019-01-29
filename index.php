@@ -29,7 +29,7 @@ ini_set("default_charset", "UTF-8");
     <div name="owl-slides" class="owl-carousel owl-theme">
 
 <?php
-$handle = fopen("custom/content.htm", "r");
+$handle = fopen("questionnaire.html", "r");
 $next_keys = "";
 if ($handle) {
     $stage = 0;
