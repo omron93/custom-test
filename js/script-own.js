@@ -6,7 +6,7 @@ $(document).ready(function(){
         center: true,
         startPosition: 0,
         dots: false,
-        smartSpeed: 50
+        smartSpeed: 20
     });
     $(".owl-carousel").trigger('refresh.owl.carousel');
     $(function () { objectFitImages() });
@@ -40,7 +40,6 @@ var recorded_keys = [];
 var recorded_times = [];
 
 $('#submit').click(function() {
-    nextPage();
     var session_end = new Date();
     var serial =  $("#custom_input").serializeArray();
     var custom_vars = "";
@@ -102,6 +101,7 @@ function nextPage(){
     if ($(".owl-carousel .owl-item.active .time_stop").length > 0 ){
         if (result_stored == false){
             result_stored = true;
+            time_recording = 0;
             $("#submit").trigger("click");
         }
     }

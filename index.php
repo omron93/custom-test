@@ -52,14 +52,16 @@ if ($handle) {
         if ($stage > 0) { echo '</div>'; }
 
         echo '
-<div><input id="submit" class="time_stop" style="width:300px;" type="button" name="submit" value="Save results" /></div>
-<div class="database_success">
+<div><input id="submit" class="time_stop" style="width:300px;" type="button" name="submit" value="Save results" />
+  <div class="database_success">
     <h4>Responses saved!</h4>
     You can now close the web page. Thank you.
-</div>
-<div class="database_fail">
+  </div>
+  <div class="database_fail">
     <h4>Error occured. Can\'t store responses into database!</h4>
+  </div>
 </div>';
+
 
             fclose($handle);
         }
