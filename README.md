@@ -6,11 +6,11 @@ The framework shows questions 'slide by slide'.
 Two types of slides exist:
 
  - **introduction** - serves for an introduction of your questionnaire and to get necessary data from the user (e.g. Name, Age)
- - **questions** - contains your questions. The user gives his answers using the keyboard. His answer and a question response time are stored into a database.
+ - **questions** - contains your questions. The user gives his answers using the keyboard. His answer and a question response time are stored into a database. Times are stored in milliseconds.
 
 ## Adding your questionnaire
 
-Your questionare is read from file `questionare.html`. This file is standard HTML file. See [HTML basics](https://www.w3schools.com/html/html_basic.asp).
+Your questionare is read from file `questionnaire.html`. This file is standard HTML file. See [HTML basics](https://www.w3schools.com/html/html_basic.asp).
 
 Some lines with the following comment have special meaning:
 
@@ -18,7 +18,18 @@ Some lines with the following comment have special meaning:
 
  - `<!--++++KEYS-->`  - separate slides and tells that next question will start response tracking. KEYS is a sequence of characters separated by ','. For example with 'a,s,d' framework will accept these three keys as a possible answer to record. Then a next slide is shown.
 
+To get to the next page clickable HTML elements with `buttonNext` class can be used - for example `<a href="#" class="buttonNext">Next</a>`.
 
+## Getting results
+
+Results can be viewed when accessing answers.php file - so URL is going to be `https://<YOUR_URL>/answers.php`. To download CSV go to `https://<YOUR_URL>/csv.php`.
+
+## Using web-response-tester
+
+ 1. Download this repository
+ 2. Edit `questionnaire.html`
+ 3. Edit `connect.php` to contain credentials to your database
+ 4. Upload the content to your webhosting
 
 ## Example
 
