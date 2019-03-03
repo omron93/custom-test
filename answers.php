@@ -13,11 +13,11 @@ ini_set("default_charset", "UTF-8");
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="js/OwlCarousel/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="js/OwlCarousel/dist/assets/owl.theme.default.min.css">
-    <script src="js/OwlCarousel/dist/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="wrtapp/OwlCarousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="wrtapp/OwlCarousel/dist/assets/owl.theme.default.min.css">
+    <script src="wrtapp/OwlCarousel/dist/owl.carousel.min.js"></script>
 
-    <link rel="stylesheet" href="style/own.css">
+    <link rel="stylesheet" href="wrtapp/wrt-style.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Answers</title>
 </head>
