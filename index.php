@@ -30,22 +30,18 @@ ini_set("default_charset", "UTF-8");
 
 <?php
 $handle = fopen("questionnaire.html", "r");
-$next_keys = "";
+$next_keys = array();
 if ($handle) {
     $stage = 0;
     while (($line = fgets($handle)) !== false) {
         if (substr( $line, 0, 8 ) == "<!--++++" && substr( $line, -4, -1 ) == "-->") {
             $keys = substr($line, 8, -4);
             if ($stage != 0) { echo "</div>"; }
-            if (empty($keys)) {
-                echo "<div class=''>";
-            } else {
-                $next_keys = $keys;
-                echo "<div class='time_start $keys'>";
-            }
+            array_push($next_keys, $keys);
+            echo "<div class=''>";
             $stage = 1;
         } else {
-            if ($stage == 0) { echo "<div class=''>"; $stage = 1; }
+            if ($stage == 0) { echo "<div class=''>"; array_push($next_keys, ""); $stage = 1; }
                 echo $line;
             }
         }
@@ -71,7 +67,7 @@ if ($handle) {
     </div>
 
 </form>
-<script type="text/javascript">var next_keys = "<?= $next_keys ?>";</script>
+<script type="text/javascript">var next_keys = <?php echo json_encode($next_keys); ?>;</script>
 <script type="text/javascript" src="wrtapp/wrt-script.js"></script>
 </body>
 

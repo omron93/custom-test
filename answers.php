@@ -39,7 +39,7 @@ ini_set("default_charset", "UTF-8");
                         $rowspan = $res2->num_rows + 1;
                         printf("<tr><td rowspan=$rowspan>%s</td><td>%s</td><td>%s</td></tr>", $row['start'], $row['end'],$row['custom_data']);
                         while ($row2 = $res2->fetch_array()) {
-                            printf("<tr><td>Question No %s</td><td>Time = %s</td><td>Key = %s</td></tr>", $row2['question_id'], $row2['time'], $row2['answer']);
+                            printf("<tr><td>Slide No %s</td><td>Time = %s</td><td>Key = %s</td></tr>", $row2['slide_id']+1, $row2['time'], $row2['answer']);
                         }
                     }
                     ?>

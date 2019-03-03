@@ -3,10 +3,10 @@
 A simple framework that shows questions and tracks responses from the user.
 
 The framework shows questions 'slide by slide'.
-Two types of slides exist:
+Time spent on each slide is measured and stored into a database (times are stored in milliseconds).
 
- - **introduction** - serves for an introduction of your questionnaire and to get necessary data from the user (e.g. Name, Age)
- - **questions** - contains your questions. The user gives his answers using the keyboard. His answer and a question response time are stored into a database. Times are stored in milliseconds.
+Some slides can have key logging enabled. If permitted key is pressed on these slides the user answer is stored into the database and a next slide is shown.
+
 
 ## Adding your questionnaire
 
@@ -16,7 +16,7 @@ Some lines with the following comment have special meaning:
 
  - `<!--++++-->`  - separate slides. Next slide is shown after pressing `Enter` key.
 
- - `<!--++++KEYS-->`  - separate slides and tells that next question will start response tracking. KEYS is a sequence of characters separated by ','. For example with 'a,s,d' framework will accept these three keys as a possible answer to record. Then a next slide is shown.
+ - `<!--++++KEYS-->`  - separate slides and tells that next question have key logging enabled. KEYS is a sequence of characters separated by ','. For example with 'a,s,d' framework will accept these three keys as a possible answer to record.
 
 To get to the next page clickable HTML elements with `buttonNext` class can be used - for example `<button type="button" class="btn btn-default btn-block buttonNext">Next</button>
 `.
@@ -73,7 +73,7 @@ How do you agree with this?
 
 Do you like a banana?
 
-<!--++++-->
+<!--++++f,j-->
 
 Do you like apple?
 ```
@@ -89,3 +89,9 @@ Used JavaScript libraries:
 
 - Owl carousel
 - object-fit-images
+
+
+PHP extensions:
+
+- json
+- mysqlnd

@@ -17,7 +17,7 @@ $table1 = "CREATE TABLE IF NOT EXISTS response_sessions (
 $table2 = "CREATE TABLE IF NOT EXISTS response_answers (
   id int(10) NOT NULL AUTO_INCREMENT,
   id_session int(10) NOT NULL,
-  question_id int(10) NOT NULL,
+  slide_id int(10) NOT NULL,
   time varchar(40) NOT NULL,
   answer varchar(40) NOT NULL,
   PRIMARY KEY (id),
@@ -39,8 +39,13 @@ $times = $_POST["times"];
 $keys = $_POST["keys"];
 $mysqli->query("INSERT INTO `response_sessions`(`start`,`end`, `custom_vars`, `custom_data`) VALUES ('$start', '$end', '$vars', '$data')") or die($mysqli->error);
 $id = $mysqli->insert_id;
-for ($i = 0; $i < count($times); $i++) {
-    $mysqli->query("INSERT INTO `response_answers`(`id_session`,`question_id`, `time`, `answer`) VALUES ('$id', '$i', '$times[$i]', '$keys[$i]')") or die($mysqli->error);
+foreach ($times as $slide => $time) {
+    if (array_key_exists($slide,$keys)) {
+        $key = $keys[$slide];
+    } else {
+        $key = '';
+    }
+    $mysqli->query("INSERT INTO `response_answers`(`id_session`,`slide_id`, `time`, `answer`) VALUES ('$id', '$slide', '$time', '$key')") or die($mysqli->error);
 }
 
 ?>
