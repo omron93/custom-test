@@ -84,3 +84,8 @@ body{
     margin: auto;
     text-align: center;
 }
+
+.buttonNext {
+    margin-top:30px;
+    margin-bottom:30px;
+}

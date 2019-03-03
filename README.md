@@ -18,7 +18,8 @@ Some lines with the following comment have special meaning:
 
  - `<!--++++KEYS-->`  - separate slides and tells that next question will start response tracking. KEYS is a sequence of characters separated by ','. For example with 'a,s,d' framework will accept these three keys as a possible answer to record. Then a next slide is shown.
 
-To get to the next page clickable HTML elements with `buttonNext` class can be used - for example `<a href="#" class="buttonNext">Next</a>`.
+To get to the next page clickable HTML elements with `buttonNext` class can be used - for example `<button type="button" class="btn btn-default btn-block buttonNext">Next</button>
+`.
 
 ## Getting results
 
@@ -39,7 +40,22 @@ What is your sex?
     <label class="radio-inline"><input type="radio" name="sex" value="1">Man</label>
     <label class="radio-inline"><input type="radio" name="sex" value="0">Woman</label>
 </div>
-<a href="#" class="btn buttonNext">Next</a>
+<button type="button" class="btn btn-default btn-block buttonNext">Next</button>
+
+<!--++++-->
+
+<p>
+    <i>The sky is blue!</i>
+</p>
+
+How do you agree with this?
+<div class="form-group">
+    <label class="radio-inline"><input type="radio" name="sky_blue" value="0">Strongly disagree</label>
+    <label class="radio-inline"><input type="radio" name="sky_blue" value="1">Disagree</label>
+    <label class="radio-inline"><input type="radio" name="sky_blue" value="2">Agree</label>
+    <label class="radio-inline"><input type="radio" name="sky_blue" value="4">Strongly agree</label>
+</div>
+<button type="button" class="btn btn-default btn-block buttonNext">Next</button>
 
 <!--++++-->
 
@@ -51,7 +67,7 @@ What is your sex?
       <li>to response <b>NO</b> press key <b>J</b></li>
     </ul>
 </p>
-<a href="#" class="btn buttonNext">Start</a>
+<button type="button" class="btn btn-default btn-block buttonNext">Next</button>
 
 <!--++++f,j-->
 
