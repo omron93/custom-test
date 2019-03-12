@@ -48,7 +48,7 @@ if ($handle) {
         if ($stage > 0) { echo '</div>'; }
 
         echo '
-<div><input id="submit" class="time_stop" style="width:300px;" type="button" name="submit" value="Save results" />
+<div><input id="submit" class="time_stop" style="width:300px;" type="button" value="Save results" />
   <div class="database_success">
     <h4>Responses saved!</h4>
     You can now close the web page. Thank you.

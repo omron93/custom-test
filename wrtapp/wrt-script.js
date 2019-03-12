@@ -42,12 +42,19 @@ $('#submit').click(function() {
     var custom_vars = "";
     var custom_data = "";
     var i = 0;
-    for (; i < serial.length-1; i += 1){
-        custom_vars += serial[i].name + ";";
-        custom_data += serial[i].value + ";";
+    var form = document.getElementById("custom_input").elements;
+    var inputs = new Set([]);
+    for (var i = 0; i<form.length; i++) {
+        if(form[i].name !== "") {
+            inputs.add(form[i].name);
+        }
     }
-    custom_vars += serial[i].name
-    custom_data += serial[i].value;
+    inputs.forEach(function(val, key, set) {
+        custom_vars += val + ";";
+        custom_data += form[val].value + ";";
+    });
+    custom_vars = custom_vars.slice(0, -1);
+    custom_data = custom_data.slice(0, -1);
     console.log("custom_data -", custom_data);
     $.ajax({
         url: 'send.php',
