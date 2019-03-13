@@ -17,6 +17,7 @@ $(".owl-carousel").on("refreshed.owl.carousel", newPage);
 $(".owl-carousel").on("translated.owl.carousel", newPage);
 
 var timer = null;
+var progress_bar = null;
 function newPage(e) {
     var index = $(".owl-carousel .owl-item.active").index();
     console.log("Page "+index);
@@ -24,9 +25,15 @@ function newPage(e) {
     page_enter = new Date();
 
     if(timeouts[index] != "") {
+        var timeout = parseInt(timeouts[index]);
         timer = setTimeout(function () {
             nextPage();
-        }, parseInt(timeouts[index]));
+        }, timeout);
+        progress_bar = new ProgressBar.Line(progressBar, {
+            duration: timeout,
+            trailWidth: 0.8,
+        });
+        progress_bar.animate(1.0);
     }
     setTimeout(function () {
         $(".owl-carousel").removeClass("lock");
@@ -110,6 +117,7 @@ function nextPage(){
     if(timer) {
         clearTimeout(timer);
         timer = null;
+        progress_bar.destroy();
     }
 
     logTime();

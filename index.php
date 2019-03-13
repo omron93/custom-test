@@ -19,6 +19,7 @@ ini_set("default_charset", "UTF-8");
     <script src="wrtapp/OwlCarousel/dist/owl.carousel.min.js"></script>
 
     <script src="wrtapp/object-fit-images/dist/ofi.min.js"></script>
+    <script src="wrtapp/progressbar.js"></script>
 
     <link rel="stylesheet" href="wrtapp/wrt-style.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -26,6 +27,7 @@ ini_set("default_charset", "UTF-8");
 </head>
 <body>
 <form id="custom_input" action="send.php" method="post">
+    <div id="progressBar" style="height:3%;"></div>
     <div name="owl-slides" class="owl-carousel owl-theme">
 
 <?php
