@@ -16,15 +16,22 @@ $(document).ready(function(){
 $(".owl-carousel").on("refreshed.owl.carousel", newPage);
 $(".owl-carousel").on("translated.owl.carousel", newPage);
 
+var timer = null;
 function newPage(e) {
     var index = $(".owl-carousel .owl-item.active").index();
     console.log("Page "+index);
 
     page_enter = new Date();
+
+    if(timeouts[index] != "") {
+        timer = setTimeout(function () {
+            nextPage();
+        }, parseInt(timeouts[index]));
+    }
     setTimeout(function () {
         $(".owl-carousel").removeClass("lock");
         console.log("Unlock");
-    }, 100);
+    }, 50);
 };
 
 
@@ -100,6 +107,11 @@ $('html').bind('keydown', function(e) {
 });
 
 function nextPage(){
+    if(timer) {
+        clearTimeout(timer);
+        timer = null;
+    }
+
     logTime();
     $(".owl-carousel").addClass("lock");
     console.log("Lock!");

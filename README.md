@@ -16,7 +16,12 @@ Some lines with the following comment have special meaning:
 
  - `<!--++++-->`  - separate slides. Next slide is shown after pressing `Enter` key.
 
- - `<!--++++KEYS-->`  - separate slides and tells that next question have key logging enabled. KEYS is a sequence of characters separated by ','. For example with 'a,s,d' framework will accept these three keys as a possible answer to record.
+ - `<!--++++OPTIONS-->`  - separate slides and add certain parameters to next slide.
+
+`OPTIONS` has format `KEYS:TIMEOUT`. Each part is optional and can be empty, colons at the end can be ommited.
+
+- `KEYS` - list of characters separated by ','. Enables key logging for next slide. When allowed key is pressed, slide time and key value are stored and next slide is shown. For example with 'a,s,d' framework will accept these three keys as a possible answer to record.
+- `TIMEOUT` - if no answer is recorded in TIMEOUT milliseconds, next page is shown.
 
 To get to the next page clickable HTML elements with `buttonNext` class can be used - for example `<button type="button" class="btn btn-default btn-block buttonNext">Next</button>
 `.

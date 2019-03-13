@@ -31,24 +31,35 @@ ini_set("default_charset", "UTF-8");
 <?php
 $handle = fopen("questionnaire.html", "r");
 $next_keys = array();
+$timeouts = array();
 if ($handle) {
     $stage = 0;
     while (($line = fgets($handle)) !== false) {
         if (substr( $line, 0, 8 ) == "<!--++++" && substr( $line, -4, -1 ) == "-->") {
-            $keys = substr($line, 8, -4);
-            if ($stage != 0) { echo "</div>"; }
-            array_push($next_keys, $keys);
-            echo "<div class=''>";
+            $options = explode(":", substr($line, 8, -4));
+            if ($stage != 0) { echo "</div>"; };
+            array_push($next_keys, $options[0]);
+            if (count($options) >= 2) {
+                array_push($timeouts, $options[1]);
+            } else {
+                array_push($timeouts, "");
+            }
+            echo "<div>";
             $stage = 1;
         } else {
-            if ($stage == 0) { echo "<div class=''>"; array_push($next_keys, ""); $stage = 1; }
-                echo $line;
+            if ($stage == 0) {
+                echo "<div>";
+                array_push($next_keys, "");
+                array_push($timeouts, "");
+                $stage = 1;
             }
+            echo $line;
         }
-        if ($stage > 0) { echo '</div>'; }
+    }
+    if ($stage > 0) { echo '</div>'; }
 
-        echo '
-<div><input id="submit" class="time_stop" style="width:300px;" type="button" value="Save results" />
+    echo '
+<div><input id="submit" class="time_stop" style="visibility:hidden;" type="button" />
   <div class="database_success">
     <h4>Responses saved!</h4>
     You can now close the web page. Thank you.
@@ -59,8 +70,8 @@ if ($handle) {
 </div>';
 
 
-            fclose($handle);
-        }
+    fclose($handle);
+}
 ?>
 
 
@@ -68,6 +79,7 @@ if ($handle) {
 
 </form>
 <script type="text/javascript">var next_keys = <?php echo json_encode($next_keys); ?>;</script>
+<script type="text/javascript">var timeouts = <?php echo json_encode($timeouts); ?>;</script>
 <script type="text/javascript" src="wrtapp/wrt-script.js"></script>
 </body>
 
