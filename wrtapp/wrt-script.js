@@ -52,10 +52,6 @@ var recorded_times = {};
 
 $('#submit').click(function() {
     var session_end = new Date();
-    var serial =  $("#custom_input").serializeArray();
-    var custom_vars = "";
-    var custom_data = "";
-    var i = 0;
     var form = document.getElementById("custom_input").elements;
     var inputs = new Set([]);
     for (var i = 0; i<form.length; i++) {
@@ -63,6 +59,8 @@ $('#submit').click(function() {
             inputs.add(form[i].name);
         }
     }
+    var custom_vars = "";
+    var custom_data = "";
     inputs.forEach(function(val, key, set) {
         custom_vars += val + ";";
         custom_data += form[val].value + ";";
@@ -113,7 +111,35 @@ $('html').bind('keydown', function(e) {
     }
 });
 
+function checkForm(){
+    var form = document.getElementById("custom_input").elements;
+    var inputs = new Set();
+    $("#custom_input").find('.owl-item.active input,'+
+                            '.owl-item.active select,'+
+                            '.owl-item.active textarea,'+
+                            '.owl-item.active button,'+
+                            '.owl-item.active datalist,'+
+                            '.owl-item.active output'
+    ).each(function(index, item){
+        if(item.name !== "") {
+            inputs.add(item.name);
+        }
+    });
+
+    var valid = true;
+    inputs.forEach(function(val, key, set) {
+        console.log(form[val]);
+        if(form[val].value === "") {
+            console.log("Missing value!");
+            valid = false;
+        }
+    });
+
+    return valid;
+}
+
 function nextPage(){
+    if(!checkForm()) {return;}
     if(timer) {
         clearTimeout(timer);
         timer = null;
