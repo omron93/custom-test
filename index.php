@@ -5,14 +5,10 @@ ini_set("default_charset", "UTF-8");
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <link rel="stylesheet" href="wrtapp/OwlCarousel/dist/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="wrtapp/OwlCarousel/dist/assets/owl.theme.default.min.css">
@@ -61,7 +57,10 @@ if ($handle) {
     if ($stage > 0) { echo '</div>'; }
 
     echo '
-<div><input id="submit" class="time_stop" style="visibility:hidden;" type="button" />
+<div>
+  <div class="time_stop spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
   <div class="database_success">
     <h4>Responses saved!</h4>
     You can now close the web page. Thank you.
