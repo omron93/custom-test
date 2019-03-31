@@ -22,7 +22,7 @@ ini_set("default_charset", "UTF-8");
     <title>Response tester</title>
 </head>
 <body>
-<form id="custom_input" action="send.php" method="post">
+<form id="custom_input" action="javascript:void(0);">
     <div id="progressBar" style="height:3%;"></div>
     <div name="owl-slides" class="owl-carousel owl-theme">
 
@@ -55,6 +55,8 @@ if ($handle) {
         }
     }
     if ($stage > 0) { echo '</div>'; }
+    array_push($next_keys, "");
+    array_push($timeouts, "");
 
     echo '
 <div>

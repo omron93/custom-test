@@ -27,10 +27,6 @@ body{
 
 
 /* Submitting results */
-#submit{
-    margin: auto;
-}
-
 .database_success{
     display: none;
     background-color: #2ae257;
@@ -69,6 +65,11 @@ body{
 }
 
 .buttonNext {
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+.buttonPrev {
     margin-top:30px;
     margin-bottom:30px;
 }

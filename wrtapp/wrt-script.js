@@ -53,6 +53,7 @@ var page_enter = new Date();
 var recorded_keys = {};
 var recorded_times = {};
 
+
 function saveResults() {
     var session_end = new Date();
     var form = document.getElementById("custom_input").elements;
@@ -83,7 +84,7 @@ function saveResults() {
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
-            $("#submit").slideUp();
+            $(".time_stop").slideUp();
             $(".database_fail").slideDown();
             $(".database_success").slideUp();
         }
@@ -130,11 +131,18 @@ function checkForm(){
     });
 
     var valid = true;
-    inputs.forEach(function(val, key, set) {
-        console.log(form[val]);
+    inputs.forEach(function(val, key, set){
+        var message = "";
         if(form[val].value === "") {
-            console.log("Missing value!");
+            message = "Missing value!";
             valid = false;
+        }
+        if(NodeList.prototype.isPrototypeOf(form[val])){
+            form[val].forEach(function(item){
+                item.setCustomValidity(message);
+            });
+        } else {
+            form[val].setCustomValidity(message);
         }
     });
 
@@ -155,6 +163,18 @@ function nextPage(){
     $(".owl-carousel").trigger("next.owl.carousel");
 }
 
+function prevPage(){
+    if(timer) {
+        clearTimeout(timer);
+        timer = null;
+        progress_bar.destroy();
+    }
+
+    $(".owl-carousel").addClass("lock");
+    console.log("Lock!");
+    $(".owl-carousel").trigger("prev.owl.carousel");
+}
+
 function logTime(code){
     var now = new Date();
     var index = $(".owl-carousel .owl-item.active").index();
@@ -170,3 +190,7 @@ $('.buttonNext').on("click", function (e) {
     e.preventDefault();
 });
 
+$('.buttonPrev').on("click", function (e) {
+    prevPage();
+    e.preventDefault();
+});
