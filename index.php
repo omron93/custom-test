@@ -1,5 +1,19 @@
 <?php
 ini_set("default_charset", "UTF-8");
+
+$cache_filename = './questionnaire.cache';
+
+// Cache is newer than questionnaire.html
+if (file_exists($cache_filename))
+{
+    $diff_in_secs = (filemtime($cache_filename) - filemtime('./questionnaire.html'));
+    if ( $diff_in_secs > 120 )
+    {
+        print file_get_contents($cache_filename);
+        exit();
+    }
+}
+ob_start();
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -87,3 +101,11 @@ if ($handle) {
 </body>
 
 </html>
+
+<?php
+$content = ob_get_contents();
+ob_end_flush();
+$file = fopen ( $cache_filename, 'w' );
+fwrite ( $file, $content );
+fclose ( $file );
+?>
