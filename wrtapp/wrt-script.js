@@ -98,13 +98,8 @@ $('html').bind('keydown', function(e) {
     var index = $(".owl-carousel .owl-item.active").index();
     var keysUp = next_keys[index].toUpperCase().split(',');
     var keysLo = next_keys[index].toLowerCase().split(',');
-    // No keys are allowed for the slide - next page on Enter
-    if (keysUp == "" && !$(".owl-carousel").hasClass("lock")) {
-        if (code == 13) {
-            nextPage();
-        }
-    } else if (keysUp != "" && !$(".owl-carousel").hasClass("lock")) {
-    // Key logging enabled
+    if (keysUp != "" && !$(".owl-carousel").hasClass("lock")) {
+        // Key logging enabled
         console.log(key);
         if (keysUp.includes(key) || keysLo.includes(key)) {
             recorded_keys[index] = key;
