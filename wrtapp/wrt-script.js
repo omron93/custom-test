@@ -27,6 +27,10 @@ function newPage(e) {
 
     page_enter = new Date();
 
+    if(next_keys[index] != "") {
+        // Remove focus if key tracking is enabled to disable using of Enter to move to next slide
+        $(':focus').blur()
+    }
     if(timeouts[index] != "") {
         var timeout = parseInt(timeouts[index]);
         timer = setTimeout(function () {
