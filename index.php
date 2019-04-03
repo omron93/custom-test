@@ -75,7 +75,7 @@ if ($handle) {
     echo '
 <div>
   <div class="time_stop spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
+    <span class="sr-only">Saving...</span>
   </div>
   <div class="database_success">
     <h4>Responses saved!</h4>
