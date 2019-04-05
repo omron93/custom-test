@@ -77,11 +77,11 @@ if ($handle) {
   <div class="time_stop spinner-border" role="status">
     <span class="sr-only">Saving...</span>
   </div>
-  <div class="database_success">
+  <div id="database_success" class="alert alert-success">
     <h4>Responses saved!</h4>
     You can now close the web page. Thank you.
   </div>
-  <div class="database_fail">
+  <div id="database_fail" class="alert alert-danger">
     <h4>Error occured. Can\'t store responses into database!</h4>
   </div>
 </div>';

@@ -26,25 +26,12 @@ body{
 }
 
 
-/* Submitting results */
-.database_success{
-    display: none;
-    background-color: #2ae257;
-    width: 100%;
-    min-width: 250px;
-    min-height: 250px;
-    padding: 100px;
-}
+/* Missing input value */
 
-.database_fail{
-    display: none;
-    background-color: #ff533a;
-    width: 100%;
-    min-width: 250px;
-    min-height: 250px;
-    padding: 100px;
+input:invalid {
+  border: 5px solid #ffdddd;
+  outline: 5px solid #ffdddd;
 }
-
 
 /* Basic elements */
 .owl-item img {

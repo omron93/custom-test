@@ -82,15 +82,15 @@ function saveResults() {
         data: {"start": session_start.toUTCString(), "end": session_end.toUTCString(), "custom_vars": custom_vars, "custom_data": custom_data, "times": recorded_times, "keys": recorded_keys},
         success: function (msg) {
             $(".time_stop").slideUp();
-            $(".database_success").slideDown();
-            $(".database_fail").slideUp();
+            $("#database_success").slideDown();
+            $("#database_fail").slideUp();
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
             $(".time_stop").slideUp();
-            $(".database_fail").slideDown();
-            $(".database_success").slideUp();
+            $("#database_fail").slideDown();
+            $("#database_success").slideUp();
         }
     });
 }
