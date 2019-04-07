@@ -21,9 +21,6 @@ var progress_bar = null;
 function newPage(e) {
     var index = $(".owl-carousel .owl-item.active").index();
     console.log("Page "+index);
-    if ($(".owl-carousel .owl-item.active .time_stop").length > 0 ){
-        saveResults();
-    }
 
     page_enter = new Date();
 
@@ -159,6 +156,11 @@ function nextPage(){
     $(".owl-carousel").addClass("lock");
     console.log("Lock!");
     $(".owl-carousel").trigger("next.owl.carousel");
+
+    // newPage might be called several times for a one page
+    if ($(".owl-carousel .owl-item.active .time_stop").length > 0 ){
+        saveResults();
+    }
 }
 
 function prevPage(){
