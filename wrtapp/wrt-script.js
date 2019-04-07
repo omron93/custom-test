@@ -1,3 +1,19 @@
+// Internet Explorer doesn't support includes()
+if (!Array.prototype.includes) {
+  Object.defineProperty(Array.prototype, "includes", {
+    enumerable: false,
+    value: function(obj) {
+        var newArr = this.filter(function(el) {
+          return el == obj;
+        });
+        return newArr.length > 0;
+      }
+  });
+}
+
+// WRT code
+
+
 $(document).ready(function(){
     $(".owl-carousel").owlCarousel({
         items: 1,
@@ -134,10 +150,11 @@ function checkForm(){
         }
         if(NodeList.prototype.isPrototypeOf(form[val])){
             form[val].forEach(function(item){
-                item.setCustomValidity(message);
+                // Edge doesn't support setCustomValidity for radio boxes
+                if (item.setCustomValidity) item.setCustomValidity(message);
             });
         } else {
-            form[val].setCustomValidity(message);
+            if (form[val].setCustomValidity) form[val].setCustomValidity(message);
         }
     });
 
