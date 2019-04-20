@@ -28,6 +28,7 @@ if ($mysqli->query($table1) === TRUE && $mysqli->query($table2) === TRUE) {
     error_log("Database created successfully");
 } else {
     error_log("Error creating database: " . $mysqli->error);
+    die(header("HTTP/1.0 503 Service Unavailable: ". $mysqli->error));
 }
 
 
@@ -37,7 +38,7 @@ $start = $_POST["start"];
 $end = $_POST["end"];
 $times = $_POST["times"];
 $keys = $_POST["keys"];
-$mysqli->query("INSERT INTO `response_sessions`(`start`,`end`, `custom_vars`, `custom_data`) VALUES ('$start', '$end', '$vars', '$data')") or die($mysqli->error);
+$mysqli->query("INSERT INTO `response_sessions`(`start`,`end`, `custom_vars`, `custom_data`) VALUES ('$start', '$end', '$vars', '$data')") or die(header("HTTP/1.0 503 Service Unavailable: " . $mysqli->error));
 $id = $mysqli->insert_id;
 $sql = "INSERT INTO `response_answers`(`id_session`,`slide_id`, `time`, `answer`) VALUES ";
 foreach ($times as $slide => $time) {
@@ -49,7 +50,7 @@ foreach ($times as $slide => $time) {
     if ($slide > 0) $sql .= ", ";
     $sql .= "('$id', '$slide', '$time', '$key')";
 }
-$mysqli->query($sql) or die($mysqli->error);
+$mysqli->query($sql) or die(header("HTTP/1.0 503 Service Unavailable: " . $mysqli->error));
 
 
 ?>

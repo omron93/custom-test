@@ -83,6 +83,7 @@ if ($handle) {
   </div>
   <div id="database_fail" class="alert alert-danger" style="display:none;">
     <h4>Error occured. Can\'t store responses into database!</h4>
+    <p><button class="btn btn-outline-secondary" onclick="saveResults();">Retry</button>
   </div>
 </div>';
 

@@ -11,6 +11,21 @@ if (!Array.prototype.includes) {
   });
 }
 
+function get_value(form_elements, name) {
+    var value = form_elements[name].value;
+    if(value == null){
+        if($('input[name='+name+']').is('input:radio')){
+            // MS Edge doesn't have value for group of radio buttons
+            value = $('input[name='+name+']:checked').val();
+        }
+    }
+    if(value == null){
+        value = '';
+    }
+    return value;
+}
+
+
 // WRT code
 
 
@@ -72,6 +87,10 @@ var recorded_times = {};
 
 
 function saveResults() {
+    $(".time_stop").slideDown();
+    $("#database_fail").slideUp();
+    $("#database_success").slideUp();
+
     var session_end = new Date();
     var form = document.getElementById("custom_input").elements;
     var inputs = new Set([]);
@@ -84,7 +103,7 @@ function saveResults() {
     var custom_data = "";
     inputs.forEach(function(val, key, set) {
         custom_vars += val + ";";
-        custom_data += form[val].value + ";";
+        custom_data += get_value(form, val) + ";";
     });
     custom_vars = custom_vars.slice(0, -1);
     custom_data = custom_data.slice(0, -1);
@@ -92,16 +111,18 @@ function saveResults() {
     $.ajax({
         url: 'send.php',
         type: 'POST',
-        timeout: 0,
+        timeout: 15000,
         data: {"start": session_start.toUTCString(), "end": session_end.toUTCString(), "custom_vars": custom_vars, "custom_data": custom_data, "times": recorded_times, "keys": recorded_keys},
         success: function (msg) {
             $(".time_stop").slideUp();
+            $("#database_fail").slideUp();
             $("#database_success").slideDown();
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
             $(".time_stop").slideUp();
+            $("#database_success").slideUp();
             $("#database_fail").slideDown();
         }
     });
@@ -144,7 +165,7 @@ function checkForm(){
     var valid = true;
     inputs.forEach(function(val, key, set){
         var message = "";
-        if(form[val].value === "") {
+        if(get_value(form, val) === "") {
             message = "Missing value!";
             valid = false;
         }
