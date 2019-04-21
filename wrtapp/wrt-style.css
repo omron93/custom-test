@@ -7,7 +7,8 @@ body{
 }
 
 #custom_input{
-    height: 100vh;
+    height: 100%;
+    width: 100%;
 }
 .owl-carousel{
     height: 100%;
@@ -16,13 +17,13 @@ body{
 .owl-item {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 100%;
+    width: 100%;
 }
 
 .owl-item > div {
-    max-width: 800px;
-    width: 100%;
-    margin: auto;
+    width: 800px;
 }
 
 
