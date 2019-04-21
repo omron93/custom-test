@@ -8,10 +8,12 @@ include "./connect.php";
 
 //print header
 printf("start_time;end_time;");
-$header1 = $mysqli->query("SELECT * FROM  `response_sessions` WHERE  `id_session` = 1");
-$custom_vars = $header1->fetch_assoc()["custom_vars"];
+$header1 = $mysqli->query("SELECT * FROM  `response_sessions`");
+$session_data = $header1->fetch_assoc();
+$custom_vars = $session_data["custom_vars"];
+$session_id = $session_data["id_session"];
 echo $custom_vars;
-$header2 = $mysqli->query("SELECT * FROM  `response_answers` WHERE  `id_session` = 1");
+$header2 = $mysqli->query("SELECT * FROM  `response_answers` WHERE  `id_session` = ".$session_id);
 while ($row = $header2->fetch_assoc()) {
     $slide_no = $row['slide_id'];
     echo ";s".($slide_no+1)."_t";
